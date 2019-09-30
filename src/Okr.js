@@ -5,6 +5,7 @@ import AltaRc from './AltaRc';
 import ConsultaRc from './ConsultaRc';
 import ConsultaOkr from './ConsultaOkr';
 import ConsultaGlobal from './ConsultaGeneral';
+import ConsultaPrueba from './ConsultaPrueba';
 import './App.css';
 import './ConsultaOkr.css'
 
@@ -41,6 +42,8 @@ class Okr extends Component{
                 <label>Consulta global</label>
                 <ConsultaGlobal />
             </div>
+            <p>----------------------------------------------------------</p>
+            <ConsultaPrueba />
             </div>
         );
     }

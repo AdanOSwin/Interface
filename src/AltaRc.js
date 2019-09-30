@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import {db} from './firebase';
 import { refOkr } from './firebase/db';
 import {Button} from 'react-bootstrap';
+//import {Link, withRouter} from 'react-router-dom';
+//import * as routes from './constants/routes';
 
 const INITIAL_STATE = {
+    idOkr: '',
     nombre: '',
     inicial: '',
     actual: '',
@@ -64,14 +67,25 @@ class AltaRc extends Component{
         console.log("RESULTADO CLAVE");
         console.log(this.state);
 
-        db.doCreateRc(nombre, inicial, actual, esperado, target, inicio, termino, okr)
+        /*db.doCreateRc(nombre, inicial, actual, esperado, target, inicio, termino, okr)
         .then(() =>{
             this.setState({...INITIAL_STATE});
             console.log("Se ha Creado el Resultado clave");
         })
         .catch(error => {
             this.setState(byPropKey('error', error))
+        });*/
+
+        db.doOkrRc(nombre, inicial, actual, esperado, target, inicio, termino, okr)
+        .then(() => {
+            this.setState({...INITIAL_STATE});
+            console.log("Se ha creado el resultado clave");
+            //history.push(routes.DIRECTORIO);
+        })
+        .catch(error => {
+            this.setState(byPropKey('error', error));
         });
+
     }
 
     render(){
@@ -137,7 +151,7 @@ class AltaRc extends Component{
                         <label>OKR</label>
                         <select value={okr} onChange={event => this.setState(byPropKey('okr', event.target.value)) }>
                             <option>Ninguno</option>
-                            {this.state.items && this.state.items.map((item) => {return(<option>{item.nombre}</option>);})}
+                            {this.state.items && this.state.items.map((item) => {return(<option value={item.id}>{item.nombre}</option>);})}
                         </select>
                     </div>
                     <button type="submit" className="btn btn-Dark">Crear</button>

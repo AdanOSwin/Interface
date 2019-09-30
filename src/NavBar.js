@@ -21,3 +21,35 @@ class NavBar extends Component{
 
 
 export default NavBar;
+
+
+/*
+
+    <Router>
+    <div className="App">
+      <NavBar />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/directorio" component={Directorio} />
+        <Route exact path="/okr" component={Okr} />
+        <Route exact path="/areas" component={Areas} />
+        <Route exact path="/equipos" component={Equipos} />
+        <Route exact path="/reportes" component={Reportes} />
+        <Route exact path="/usuarios" component={Usuarios} />
+      </Switch>
+
+      //inicio
+      prioridades semanales
+      okr trimestrales
+      logs/noticias
+      espacio
+      espacio
+      espacio
+      soporte
+      ayuda
+      
+    </div>
+    </Router>
+
+
+*/

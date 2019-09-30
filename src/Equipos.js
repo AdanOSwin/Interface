@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import AltaEquipo from './AltaEquipo';
+import ConsultaEquipo  from './ConsultaEquipo';
+import Toggle from './Toggle';
 
 class Equipos extends Component{
     render(){
@@ -10,6 +12,7 @@ class Equipos extends Component{
                     <p>Equipo Dinamita</p>
                     <p>Equipo Maravilla</p>
                     <p>Pandilla buena onda</p>
+                <ConsultaEquipo />
                 <AltaEquipo />
             </div>
         );

@@ -65,28 +65,20 @@ class ConsultaGlobal extends Component{
             console.log(newState);
         });
 
-        refRc.on('value', (snapshot) => {
-            const datos = snapshot.val();
-            const newState = [];
-            for(const dato in datos){
-                newState.push({
-                   id: dato,
-                   nombre: datos[dato].nombre,
-                   inicial: datos[dato].inicial,
-                   actual: datos[dato].actual,
-                   esperado: datos[dato].esperado,
-                   target: datos[dato].target,
-                   inicio: datos[dato].inicio,
-                   termino: datos[dato].termino,
-                   okr: datos[dato].okr 
+        let datos = [];
+        refOkr.once('value')
+        .then(snapshot => {
+            datos = []
+            snapshot.forEach(item => {
+                datos.push({
+                    id: item.key,
+                    ...item.val()
                 });
-            }
-            this.setState({
-                datos:newState
             });
-            console.log("Resultados clave");
+            console.log("----------CONSULTA OPCIONAL OKR-------");
             console.log(datos);
-        });
+            return datos;
+        })
     }
 
 

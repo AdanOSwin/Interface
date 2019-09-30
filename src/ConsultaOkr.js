@@ -36,8 +36,8 @@ class ConsultaOkr extends Component{
     removeOkr(uuid){
         console.log("Madison");
         const itemOkr = firebase.database().ref(`okr/${uuid}`);
-        console.log("Davenport");
         itemOkr.remove();
+        console.log("Davenport");
     }
 
     componentDidMount(){

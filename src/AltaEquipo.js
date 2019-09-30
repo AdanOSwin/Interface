@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {db} from './firebase';
 import {refArea, refUsers} from './firebase/db';
+import {Lnk, withRouter} from 'react-router-dom';
 import * as routes from './constants/routes';
 
 const INITIAL_STATE = {

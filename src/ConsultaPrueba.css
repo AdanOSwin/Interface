@@ -1,0 +1,36 @@
+label{
+    display: inline;
+    border: 5px;
+    margin: 5px;
+}
+
+span{
+    border: 5px;
+    margin: 5px;
+}
+
+.envuelve{
+    border: 5px;
+    margin: 5px;
+}
+
+
+.okr{
+    background-color: #a5c7d1;
+    padding: 15px; 
+    margin: 10px; 
+}
+
+.rc{
+    background-color: #9ad498;
+    padding: 15px;
+    margin: 30px;
+    text-align: left;
+}
+
+.cuerpo{
+    background-color: #8ED3F3;
+    width: 1000px;
+    border: 3px;
+    margin: 3px;
+}
