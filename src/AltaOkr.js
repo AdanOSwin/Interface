@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {db} from './firebase';
-import {refOkr} from './firebase/db';
-import firebase from './firebase';
+import {refOkr, refEquipo} from './firebase/db';
+import 'firebase/app';
 import 'firebase/database';
 //import {Button} from 'reactstrap';
 
@@ -12,9 +12,9 @@ const INITIAL_STATE = {
     prioridad: '',
     tipo: '',
     progreso: '',
-    padre: '',
     error: null,
 }
+
 
 const byPropKey = (propertyName, value) => () => ({
     [propertyName]: value,
@@ -47,9 +47,29 @@ class AltaOkr extends Component{
             console.log("OKR en OKR");
             console.log(newState);
         });
+
+        refEquipo.on('value', (snapshot) =>{
+            const equipos = snapshot.val();
+            const estado = [];
+            for(const equipo in equipos){
+                estado.push({
+                    id: equipo,
+                    nombre: equipos[equipo].nombre
+                });
+            }
+            this.setState({
+                equipos: estado
+            });
+            console.log("------Equipos en Creacion de OKR----------");
+            console.log(equipos);
+        })
     }
 
     onSubmit = (event) => {
+        
+        //const postKey = db.ref().child('okr').push().key;
+        //const claveOkr = claveUnica.key;
+        //console.log(postKey);
         event.preventDefault();
         console.log("DATOS OKR");
         console.log(this.state);
@@ -61,10 +81,13 @@ class AltaOkr extends Component{
             prioridad,
             tipo,
             progreso,
-            padre
         } = this.state;
-
-        db.doCreateOkr(nombre, descripcion, equipo, prioridad, tipo, progreso, padre)
+        
+        //const refId = db.ref.push().key();
+        const newRef = db.refArea.push();
+        const idOkr = newRef.key
+        console.log("ID okr: "+ idOkr);
+        db.doCreateOkr(idOkr, nombre, descripcion, equipo, prioridad, tipo, progreso)
         .then(() => {
             this.setState({...INITIAL_STATE});
             console.log("Se ha creado el OKR");
@@ -82,8 +105,7 @@ class AltaOkr extends Component{
             equipo,
             prioridad,
             tipo,
-            progreso,
-            padre
+            progreso
         } = this.state;
 
         return(
@@ -104,9 +126,13 @@ class AltaOkr extends Component{
                     </div>
                     <div>
                         <label>Equipo</label>
-                        <input type="text" 
-                        value={equipo} onChange={event => this.setState(byPropKey('equipo', event.target.value))}
-                        />
+                        <select value={equipo} onChange={event => this.setState(byPropKey('equipo', event.target.value))}>
+                            {this.state.equipos && this.state.equipos.map((equipo) =>{
+                                return(
+                                    <option value={equipo.nombre}>{equipo.nombre}</option>
+                                );
+                            })}
+                        </select>
                     </div>
                     <div>
                         <label>Prioridad</label>
@@ -128,22 +154,16 @@ class AltaOkr extends Component{
                     </div>
                     <div>
                         <label>Progreso</label>
-                        <input type="text" 
+                        <input type="number" 
                         value={progreso} onChange={event => this.setState(byPropKey('progreso', event.target.value))}
                         />
-                    </div>
-                    <div>
-                        <label>OKR global</label>
-                        <select value={padre} onChange={event => this.setState(byPropKey('padre', event.target.value))}>
-                            <option value="ninguno">Ninguno</option>
-                            {this.state.items && this.state.items.map((item) => {return(<option value={item.nombre}>{item.nombre}</option>);})}
-                        </select>
                     </div>
                     <button type="submit" color="dark" value="Crear">
                         Crear
                     </button>
                 </form>
             </div>
+            
         );
     }
 }

@@ -113,25 +113,25 @@ class AltaRc extends Component{
                     </div>
                     <div>
                         <label>Valor de inicio</label>
-                        <input type="text"
+                        <input type="number"
                         value={inicial} onChange={event=> this.setState(byPropKey('inicial', event.target.value))}
                         />
                     </div>
                     <div>
                         <label>Valor Actual</label>
-                        <input type="text"
+                        <input type="number"
                         value={actual} onChange={event => this.setState(byPropKey('actual', event.target.value))}
                         />
                     </div>
                     <div>
                         <label>Valor esperado</label>
-                        <input type="text" 
+                        <input type="number" 
                         value={esperado} onChange={event => this.setState(byPropKey('esperado', event.target.value))}
                         />
                     </div>
                     <div>
                         <label>Valor Objetivo</label>
-                        <input type="text" 
+                        <input type="number" 
                         value={target} onChange={event => this.setState(byPropKey('target', event.target.value))}
                         />
                     </div>

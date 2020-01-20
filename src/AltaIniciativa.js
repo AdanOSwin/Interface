@@ -117,6 +117,7 @@ class AltaIniciativa extends Component{
                 <div>
                 <label>Equipo</label>
                 <select value={equipo} onChange={event => this.setState(byPropKey('equipo', event.target.value))}>
+                    <option value="Ninguno">Ninguno</option>
                     {this.state.items && this.state.items.map((item) => {
                         return(
                             <option value={item.id}>{item.nombre}</option>
@@ -135,11 +136,12 @@ class AltaIniciativa extends Component{
                     <select value={okr} onChange={event => this.setState(byPropKey('okr', event.target.value))}>
                     {this.state.items2 && this.state.items2.map((item2) => {
                         return(
-                            <option value={item2.id}>{item2.id}</option>
+                            <option value={item2.id}>{item2.nombre}</option>
                         );
                     })}
                     </select>
                 </div>
+                <button value="submit" type="submit">Crear</button>
             </form>
             </div>
         );

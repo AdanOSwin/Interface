@@ -3,23 +3,27 @@
 }
 
 
-ul{
+ ul.navLinks{
   list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 150px;
+  margin-top: 70px;
+  margin-left: 0px;
+  padding: 0px;
+  width: 100px;
+  height: 650px;
   background-color: #333;
   position: fixed;
   overflow: hidden;
   text-decoration: none;
 }
 
-li{
+
+li.liLinks{
   display: block;
   width: 60px;
+  height: 100px;
   color: #e4dfe8;
   padding: 30px 43px;
-  border: 1px solid #555;
+  
 }
 
 .muestra{
@@ -69,10 +73,9 @@ input, select{
   margin: 2%;
 }
 .despliegue{
-  margin-left: 11%;
-  padding: 1px 12px;
+  margin-left: 7.8%;
+  padding: 90px 120px;
   border: 1px solid #555;
-  height: 4000px
 }
 
 .nombre{

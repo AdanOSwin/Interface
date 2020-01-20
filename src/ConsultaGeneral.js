@@ -6,6 +6,8 @@ import 'firebase/database';
 import {refOkr, refRc} from './firebase/db';
 import './ConsultaOkr.css';
 import {ProgressBar} from 'react-bootstrap';
+import Toggle from './Toggle';
+import ConsultaPrueba from './ConsultaPrueba'
 //import ProgressBar from '@bit/react-bootstrap.react-bootstrap.progress-bar';
 
 const INITIAL_STATE = {
@@ -15,7 +17,6 @@ const INITIAL_STATE = {
     prioridad: '',
     tipo: '',
     progreso: '',
-    padre: '',
     error: null,
 };
 
@@ -55,7 +56,6 @@ class ConsultaGlobal extends Component{
                    prioridad: items[item].prioridad,
                    tipo: items[item].tipo,
                    progreso: items[item].progreso,
-                   padre: items[item].padre 
                 });
             }
             this.setState({
@@ -65,20 +65,55 @@ class ConsultaGlobal extends Component{
             console.log(newState);
         });
 
-        let datos = [];
-        refOkr.once('value')
-        .then(snapshot => {
-            datos = []
-            snapshot.forEach(item => {
-                datos.push({
-                    id: item.key,
-                    ...item.val()
+        
+    }
+
+    reset(){
+        this.setState({
+            rcs: []
+        });
+    }
+
+    enviaId = (id) =>{
+        //Consulta de RC dentro de los Objetivos
+        firebase.database().ref(`okr/${id}/rc/`).on('value', snapshot =>{
+            let rcs = snapshot.val();
+            const estado = [];
+            for(const rc in rcs){
+                estado.push({
+                    id: rc,
+                    nombre: rcs[rc].nombre,
+                    inicial: rcs[rc].inicial,
+                    actual: rcs[rc].actual,
+                    esperado: rcs[rc].esperado,
+                    target: rcs[rc].target,
+                    inicio: rcs[rc].inicio,
+                    termino: rcs[rc].termino
                 });
+            }
+            console.log("------------RCS-MADISON-----------");
+            console.log(rcs);
+            return estado;
+        });
+
+        //Consulta de iniciativas dentro de los OKR
+        firebase.database().ref(`okr/${id}/iniciativas`).on('value', snapshot =>{
+            const iniciativas = snapshot.val();
+            const estado = [];
+            for(const iniciativa in iniciativas){
+                estado.push({
+                    id: iniciativa,
+                    nombre: iniciativas[iniciativa].nombre,
+                    progreso: iniciativas[iniciativa].progreso
+                });
+            }
+            this.setState({
+                iniciativas: estado
             });
-            console.log("----------CONSULTA OPCIONAL OKR-------");
-            console.log(datos);
-            return datos;
-        })
+            console.log("-----------INICIATIVAS/JOI-----------------");
+            console.log(iniciativas);
+        });
+
     }
 
 
@@ -112,21 +147,26 @@ class ConsultaGlobal extends Component{
                     </div>
                 </section>
 
-                <h3>Separador</h3>
+                <h3>Do it 4 her</h3>
                 {this.state.items && this.state.items.map((item) =>{
                     return(
                     <div>
-                        <label>{item.nombre}</label>
-                        {this.state.datos && this.state.datos.map((dato) => {
-                        return(
-                            <div>
-                                <label></label>
-                            </div>
-                        );
+                        <span>{item.nombre}</span>
+                        <button onClick={() => this.enviaId(item.id)}>Ver RC</button>
+                        {this.state.estado && this.state.estado.map((rc) =>{
+                            console.log("alskdlask");
+                            return(
+                                <div>
+                                    <span >{rc.nombre}</span>
+                                </div>
+                            );
                         })}
                     </div>
                     );
                 })}
+                <h4>-----------------Charlie--------------</h4>
+                <div>
+                </div>
             </div>
         );
     }

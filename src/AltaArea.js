@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {db} from './firebase';
 import * as routes from './constants/routes';
+import {refUsers} from './firebase/db';
 
 
 const INITIAL_STATE = {
@@ -25,6 +26,24 @@ class AltaArea extends Component{
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentDidMount(){
+        refUsers.on('value', (snapshot) =>{
+            const users = snapshot.val();
+            const newState = [];
+            for(const user in users){
+                newState.push({
+                    id: user,
+                    nombre: users[user].nombre
+                });
+            }
+            this.setState({
+                users: newState
+            });
+            console.log("Usuarios en la creacion de Areas");
+            console.log(newState); 
+        });
+    }
+
     onSubmit = (event) => {
         event.preventDefault();
         console.log("Datos de Area");
@@ -43,8 +62,9 @@ class AltaArea extends Component{
         db.doCreateArea(nombre, descripcion, jefe)
         .then(() => {
             this.setState({...INITIAL_STATE});
-            console.log("Se ha creado el KPI");
+            console.log("Se ha creado el Area");
             history.push(routes.AREAS);
+            this.setState({...INITIAL_STATE});
         })
         .catch(error => {
             this.setState(byPropKey('error', error))
@@ -76,8 +96,11 @@ class AltaArea extends Component{
                     <div>
                         <label>Encargado</label>
                         <select value={jefe} onChange={event => this.setState(byPropKey('jefe', event.target.value))}>
-                            <option value="1">Clara</option>
-                            <option value="2">Amy</option>
+                            {this.state.users && this.state.users.map((user) =>{
+                                return(
+                                    <option value={user.id}>{user.nombre}</option>
+                                );
+                            })}
                         </select>
                     </div>
                     <button value="submit" type="submit">Crear</button>

@@ -9,24 +9,18 @@ import prioridad from './numerado_prioridad.svg';
 import objetivo from './objetivo_3.svg';
 import logs from './historial.svg';
 
-//MI OKR
-//directorio general
-//CREAR OKR
-//CREAR RC
-//logs
-//info
 
 class UserNavBar  extends Component{
     render(){
         return(
             <nav>
                 <ul className="navLinks">
-                    <NavLink style={{textDecoration: 'none'}} exact={true} activeClassName="isActive" to="/"><li><img src={home} size={100} alt="Inicio" /></li></NavLink>
-                    <NavLink style={{textDecoration: 'none'}} to="/okr"><li><img src={objetivo} alt="OKR" /></li></NavLink>
-                    <NavLink style={{textDecoration: 'none'}}  to="/prioridades"><li><img src={prioridad} alt="Prioridades" /></li></NavLink>
-                    <NavLink style={{textDecoration: 'none'}} to="/reportes"><li><img src={reportes} alt="Reportes" /></li></NavLink>
-                    <NavLink style={{textDecoration: 'none'}} to="/logs"><li><img src={logs} alt="Historial de logs" /></li></NavLink>
-                    <NavLink style={{textDecoration: 'none'}} to="/info"><li><img src={info} alt="Informacion/Ayuda" /></li></NavLink>
+                    <NavLink style={{textDecoration: 'none'}} exact={true} activeClassName="isActive" to="/"><li className="liLinks"><img style={{width: '40px', height: '40px', margin: '-20px'}} src={home}  alt="Inicio" /></li></NavLink>
+                    <NavLink style={{textDecoration: 'none'}} to="/okr"><li className="liLinks"><img style={{width: '40px', height: '40px', margin: '-20px'}} src={objetivo} alt="OKR" /></li></NavLink>
+                    <NavLink style={{textDecoration: 'none'}}  to="/prioridades"><li className="liLinks"><img style={{width: '40px', height: '40px', margin: '-20px'}} src={prioridad} alt="Prioridades" /></li></NavLink>
+                    <NavLink style={{textDecoration: 'none'}} to="/reportes"><li className="liLinks"><img style={{width: '40px', height: '40px', margin: '-20px'}} src={reportes} alt="Reportes" /></li></NavLink>
+                    <NavLink style={{textDecoration: 'none'}} to="/logs"><li className="liLinks"><img style={{width: '40px', height: '40px', margin: '-20px'}} src={logs} alt="Historial de logs" /></li></NavLink>
+                    <NavLink style={{textDecoration: 'none'}} to="/info"><li className="liLinks"><img style={{width: '40px', height: '40px', margin: '-20px'}} src={info} alt="Informacion/Ayuda" /></li></NavLink>
                 </ul>
             </nav>
         );

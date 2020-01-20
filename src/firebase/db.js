@@ -14,8 +14,8 @@ export const refKpi = firebase.database().ref('kpi');
 export const refRc = db.ref('rc');
 export const refArea = db.ref('area');
 export const refUsers = db.ref('users');
-export const refEquipo = db.ref('equipo');
-export const refOkrRc = db.ref('okr');
+export const refEquipo = db.ref('equipos');
+//export const refOkrRc = db.ref(`okr/${idOkr}/rc`);
 export const refOkr = db.ref('okr');
 
 export const doCreateIniciativa = (nombre, descripcion, equipo, progreso, okr) =>
@@ -48,19 +48,19 @@ db.ref('rc').push({
     okr
 });
 
-export const doCreateOkr = (nombre, descripcion, equipo, prioridad, tipo, progreso, padre) =>
-db.ref('okr').push({
+export const doCreateOkr = (idOkr, nombre, descripcion, equipo, prioridad, tipo, progreso) =>
+db.ref(`okr/${idOkr}`).set({
     nombre,
     descripcion,
     equipo,
     prioridad,
     tipo,
     progreso,
-    padre
+    idOkr
 })
 
 export const doCreateEquipo = (nombre, descripcion, area, jefe) =>
-db.ref('equipos/').push({
+db.ref('equipos').push({
     nombre,
     descripcion,
     area,

@@ -4,3 +4,4 @@ export const REPORTES = '/reportes';
 export const USUARIOS = '/usuarios';
 export const DIRECTORIO = '/directorio';
 export const HOME = '/home';
+export const INFO = '/Info';

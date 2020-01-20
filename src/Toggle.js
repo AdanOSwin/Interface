@@ -6,6 +6,8 @@ import 'firebase/database';
 import Despliega from './Despliega.png';
 import mas_2 from './mas_2.svg';
 import mas_3 from './mas_3.svg';
+import arrow from './down_arrow.svg';
+import {Button} from 'react-bootstrap';
 
 const INITIAL_STATE = {
     nombre: '',
@@ -44,7 +46,7 @@ class Toggle extends Component{
     render(){
         return(
             <div>
-            <button onClick={this.toggle}><img src={mas_3} alt="Despliega logo" /></button>
+            <Button style={{height: '10px'}} type="button" class="btn btn-primary" onClick={this.toggle}><img style={{width: '40px', height: '15px', top: '1300px;'}} src={arrow} alt="Despliega logo" /></Button>
                 {this.state.on && this.props.children
                 }
             </div>

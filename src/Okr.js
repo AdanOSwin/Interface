@@ -6,6 +6,9 @@ import ConsultaRc from './ConsultaRc';
 import ConsultaOkr from './ConsultaOkr';
 import ConsultaGlobal from './ConsultaGeneral';
 import ConsultaPrueba from './ConsultaPrueba';
+import AltaIniciativa from './AltaIniciativa';
+import ConsultaAnidada from './ConsultaAnidada';
+import ConsultaGeneral from './ConsultaGeneral';
 import './App.css';
 import './ConsultaOkr.css'
 
@@ -13,13 +16,17 @@ class Okr extends Component{
     render(){
         return(
             <div className="despliegue">
-                <div className="CrearOkr">
+                <div className="Crear">
                     <label>Crear OKR</label>
                     <Toggle><AltaOkr /></Toggle>
                 </div>
-                <div className="CrearRc">
+                <div className="Crear">
                     <label>Crear RC</label>
                     <Toggle><AltaRc /></Toggle>
+                </div>
+                <div className="Crear">
+                <label>Crear Iniciativa</label>
+                <Toggle><AltaIniciativa/></Toggle>
                 </div>
                 <br />
                 <br />
@@ -40,10 +47,10 @@ class Okr extends Component{
             </div>
             <div>
                 <label>Consulta global</label>
-                <ConsultaGlobal />
             </div>
             <p>----------------------------------------------------------</p>
-            <ConsultaPrueba />
+            <span>--------------Separacion------------------</span>
+            <ConsultaGeneral/>
             </div>
         );
     }

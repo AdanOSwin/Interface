@@ -50,7 +50,7 @@ class AltaUsuario extends Component{
         });
 
 
-        /*refEquipo.on('value', (snapshot) => {
+        refEquipo.on('value', (snapshot) => {
             const equipos = snapshot.val();
             const newState = [];
             for(const equipo in equipos){
@@ -64,7 +64,7 @@ class AltaUsuario extends Component{
             });
             console.log("datos de equipos");
             console.log(newState);
-        });*/
+        });
     }
 
     onSubmit = (event) => {
@@ -90,7 +90,7 @@ class AltaUsuario extends Component{
         .then(() => {
            this.setState({...INITIAL_STATE});
            console.log("Se ha creado el usuario");
-           history.push(routes.USUARIOS);
+           history.push(routes.INFO);
         })
         .catch(error => {
            this.setState(byPropKey('error', error))
@@ -158,14 +158,14 @@ class AltaUsuario extends Component{
                     
                     <div>
                         <label>Contraseña</label>
-                        <input type="text" 
+                        <input type="password" 
                         value={pass1} onChange={event => this.setState(byPropKey('pass1', event.target.value))}
                         />
                     </div>
                     
                     <div>
-                        <label>Volver a escribir la Contraseña</label>
-                        <input type="text" 
+                        <label>Reintroducir la Contraseña</label>
+                        <input type="password" 
                         value={pass2} onChange={event => this.setState(byPropKey('pass2', event.target.value))}
                         />
                     </div>
@@ -178,17 +178,17 @@ class AltaUsuario extends Component{
                     <div>
                         <label>Equipo</label>
                         <select value={equipo} onChange={event=> this.setState(byPropKey('equipo', event.target.value))}>
-                            <option value="ninguno">Ninguno</option>
-                            <option value="nasa">NASA</option>
-                            <option value="jpl">JPL</option>
-                            <option value="cia">CIA</option>
+                            {this.state.equipos && this.state.equipos.map((equipo) => {
+                                return(
+                                    <option value={equipo.id}>{equipo.nombre}</option>
+                                );
+                            })}
                         </select>       
                     </div>
                     <div>
                         <label>Area</label>
                         <select value={area} onChange={event=> this.setState(byPropKey('area', event.target.value))}>
-                            <option value="ninguno">Ninguno</option>
-                            {this.state.areas && this.state.areas.map((area) => {return(<option value={area.nombre}>{area.nombre}</option>)})}
+                            {this.state.areas && this.state.areas.map((area) => {return(<option value={area.id}>{area.nombre}</option>)})}
                         </select>       
                     </div>
                 <button disabled={IsInvalid} type="submit" color="dark" value="crear">Crear Usuario</button>
