@@ -5,3 +5,6 @@ export const USUARIOS = '/usuarios';
 export const DIRECTORIO = '/directorio';
 export const HOME = '/home';
 export const INFO = '/Info';
+export const LANDING = './landing';
+export const SIGN_IN = './signin'
+export const SIGN_UP = './signup'

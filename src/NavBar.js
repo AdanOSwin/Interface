@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 
+//ESTE COMPONENTE YA NO SE ESTA USANDO
+
 class NavBar extends Component{
     render(){
         return(

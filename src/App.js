@@ -12,24 +12,28 @@ import Okr from './Okr';
 import Home from './Home';
 //import UserNav from './UserNav';
 import UserNavBar from './UserNavBar';
+import LandingNavBar from './LandingNavBar';
 import Logs from './Logs';
 import Landing from './Landing';
 import Info from './Info';
+import RegisterUsuario from './RegisterUser';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 //import Despliega from './Altas';
 import './App.css';
+import RegistraUsuario from './RegisterUser';
 
 function App() {
   return (
     <div>
     <Router>
     <div className="App">
-      <UserNavBar />
+       <h2>###############</h2>
+       <LandingNavBar />
       <Switch>
         <Route exact path="/" component={Landing} />
-        <Route exact path="/okr" component={Okr} />
-        <Route exact path="/reportes" component={Reportes} />
-        <Route exact path="/logs" component={Logs} />
+        <Route exact path="/signup" component={RegistraUsuario} />
+        <Route exact path="/signin" component={Reportes} />
+        <Route exact path="/pwdforget" component={Logs} />
         <Route exact path="/Info" component={Info} />
       </Switch>
     </div>
