@@ -28,7 +28,7 @@ class RegistraUsuario extends Component{
         };
     }
 
-    onSUbmit = (event) =>{
+    onSubmit = (event) =>{
         event.preventDefault();
         console.log("Creacion de usuario");
         console.log(this.state);
@@ -48,11 +48,11 @@ class RegistraUsuario extends Component{
 
         auth.doCreateUserWithEmailAndPassword(email, pass1)
         .then(authUser =>{
-            db.doCreateUser(nombre, apellido, email, pass1, tel, empresa)
+            db.doRegisterUser(nombre, apellido, email, pass1, tel, empresa)
             .then(() =>{
                 this.setState({...INITIAL_STATE});
                 console.log("Se ha creado el usuario");
-                //history.push
+                history.push(routes.HOME);
             })
             .catch(error => {
                 this.setState(byPropKey('error', error))
@@ -87,7 +87,7 @@ class RegistraUsuario extends Component{
     
         return(
             <div>
-                <form onSubmit={this.onSUbmit}>
+                <form onSubmit={this.onSubmit}>
                     <div>
                         <label>Nombre </label>
                         <input type="text" 
@@ -131,7 +131,7 @@ class RegistraUsuario extends Component{
                         />
                     </div>
                 </form>
-                <button disabled={isInvalid} type="submit">Crear cuenta</button>
+                <button disabled={isInvalid} type="submit" value="crear">Crear cuenta</button>
             </div>
         );
     }

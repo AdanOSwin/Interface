@@ -19,6 +19,7 @@ import Info from './Info';
 import RegisterUsuario from './RegisterUser';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 //import Despliega from './Altas';
+import Signin from './Signin';
 import './App.css';
 import RegistraUsuario from './RegisterUser';
 
@@ -27,14 +28,12 @@ function App() {
     <div>
     <Router>
     <div className="App">
-       <h2>###############</h2>
        <LandingNavBar />
       <Switch>
         <Route exact path="/" component={Landing} />
-        <Route exact path="/signup" component={RegistraUsuario} />
-        <Route exact path="/signin" component={Reportes} />
-        <Route exact path="/pwdforget" component={Logs} />
         <Route exact path="/Info" component={Info} />
+        <Route exact path="/signup" component={RegistraUsuario} />
+        <Route exact path="/signin" component={Signin} />
       </Switch>
     </div>
     </Router>

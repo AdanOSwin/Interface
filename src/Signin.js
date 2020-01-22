@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
 import * as routes from './constants/routes';
 import {auth} from './firebase';
-import {BrowserRouter as Router, Switch, Route, withRouter} from 'react-router-dom';
-import RegistraUsuario from './RegisterUser';
-import Logs from './Logs';
-import Signin from './Signin';
-import LandingNavBar from './LandingNavBar'; 
-import Info from './Info';
+import {withRouter} from 'react-router-dom';
 
 const INITIAL_STATE = {
     email: '',
@@ -21,7 +16,7 @@ const byPropKey = (propertyName, value) => () =>({
 
 
 
-class Landing extends Component{
+class Sigin extends Component{
     constructor(props){
         super(props);
 
@@ -30,7 +25,7 @@ class Landing extends Component{
         };
     }
 
-    /*onSubmit = (event) => {
+    onSubmit = (event) => {
         const{
             email,
             password, 
@@ -52,7 +47,7 @@ class Landing extends Component{
     
     } 
 
-    */
+
 
     render(){
 
@@ -64,15 +59,6 @@ class Landing extends Component{
         const isInvalid = password === '' || email === '';
         return(
             <div>
-                <br/>
-                <br/>
-                <br/>
-                <h1>Pagina de organización empresarial IDEE</h1>
-                <p>Somos una empresa que se dedica a la gestion de objetivos de manera dinamica</p>
-            
-
-            </div>
-            /*<div>
                 <h1>Pagina de Inicio</h1>
                 <h2>Sistema de organización empresarial IDEE</h2>
                 <form onSubmit={this.onSubmit}>
@@ -90,10 +76,10 @@ class Landing extends Component{
                 </div>
                 </form>
                 <button disabled={isInvalid} type="submit">Sign In</button>
-            </div>*/
+            </div>
         );
     }
 }
 
 
-export default Landing;
+export default Sigin;

@@ -18,6 +18,15 @@ export const refEquipo = db.ref('equipos');
 //export const refOkrRc = db.ref(`okr/${idOkr}/rc`);
 export const refOkr = db.ref('okr');
 
+export const doRegisterUser = (nombre, apellido, email, pass1, tel, empresa) =>
+db.ref('users').push({
+    nombre, 
+    apellido,
+    email,
+    pass1,
+    empresa
+});
+
 export const doCreateIniciativa = (nombre, descripcion, equipo, progreso, okr) =>
 db.ref(`okr/${okr}/iniciativas`).push({
     nombre,
