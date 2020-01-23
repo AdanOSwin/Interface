@@ -26,16 +26,11 @@ class Registra extends Component{
             ...INITIAL_STATE
         };
 
-        //this.onSubmit = this.onSubmit.bind(this);
-        this.onCreate = this.onCreate.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        //this.onCreate = this.onCreate.bind(this);
     }
 
-    onCreate = (event) =>{
-        alert("Se ha activado el evento")
-        console.log(this.state);
-    };
-
-    /*onSubmit = (event) =>{
+    onSubmit = (event) =>{
         event.preventDefault();
         console.log("Registro de usuario");
         console.log(this.state);
@@ -52,7 +47,16 @@ class Registra extends Component{
             history
         } = this.props;
 
-        auth.doCreateUserWithEmailAndPassword(email, pass1)
+        db.doRegisterUser(nombre, apellido, email, pass1, empresa)
+        .then(() =>{
+            this.setState({...INITIAL_STATE});
+            console.log("Se haregistrado el usuario");
+            history.push(routes.HOME);
+        })
+        .catch(error =>{
+            this.setState(byPropKey('error', error));
+        });
+        /*auth.doCreateUserWithEmailAndPassword(email, pass1)
         .then( authUser =>{
             db.doRegisterUser(nombre, apellido, email, pass1, empresa)
             .then(() =>{
@@ -66,9 +70,9 @@ class Registra extends Component{
         })
         .catch(error =>{
             this.setState(byPropKey('error', error))
-        });
+        });*/
 
-    };*/
+    };
 
     render(){
         const{
