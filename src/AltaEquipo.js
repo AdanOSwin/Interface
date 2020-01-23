@@ -69,8 +69,7 @@ class AltaEquipo extends Component{
             nombre,
             descripcion,
             area,
-            encargado,
-            error
+            encargado
         } = this.state;
 
         const{
