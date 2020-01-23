@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {db, auth} from './firebase';
 import * as routes from './constants/routes';
+import RegistraUsuario from './RegisterUser';
+
 
 const INITIAL_STATE = {
     nombre: '',
@@ -8,29 +10,34 @@ const INITIAL_STATE = {
     email: '',
     pass1: '',
     pass2: '',
-    tel: '',
     empresa: '',
-    error: null,
-}
+    error: null
+};
 
-
-const byPropKey = (propertyName,  value) => () => ({
+const byPropKey = (propertyName, value) => () => ({
     [propertyName]: value,
 });
 
-
-class RegistraUsuario extends Component{
+class Registra extends Component{
     constructor(props){
         super(props);
 
         this.state={
             ...INITIAL_STATE
         };
+
+        //this.onSubmit = this.onSubmit.bind(this);
+        this.onCreate = this.onCreate.bind(this);
     }
 
-    onSubmit = (event) =>{
+    onCreate = (event) =>{
+        alert("Se ha activado el evento")
+        console.log(this.state);
+    };
+
+    /*onSubmit = (event) =>{
         event.preventDefault();
-        console.log("Creacion de usuario");
+        console.log("Registro de usuario");
         console.log(this.state);
 
         const{
@@ -38,103 +45,92 @@ class RegistraUsuario extends Component{
             apellido,
             email,
             pass1,
-            tel,
             empresa
-        } = this.state; 
+        } = this.state;
 
         const{
-            history,
+            history
         } = this.props;
-        
+
         auth.doCreateUserWithEmailAndPassword(email, pass1)
-        .then(authUser =>{
-            db.doRegisterUser(nombre, apellido, email, pass1, tel, empresa)
+        .then( authUser =>{
+            db.doRegisterUser(nombre, apellido, email, pass1, empresa)
             .then(() =>{
                 this.setState({...INITIAL_STATE});
-                console.log("Se ha creado el usuario");
+                console.log("Se ha Registrado un usuario");
                 history.push(routes.HOME);
             })
-            .catch(error => {
-                this.setState(byPropKey('error', error))
-            });
+            .catch(error =>{
+                this.setState(byPropKey('error', error));
+            }); 
         })
         .catch(error =>{
             this.setState(byPropKey('error', error))
         });
 
-        //db.doCreateUser(nombre, apellido, email, pass1, tel, empresa)
-
-    }
+    };*/
 
     render(){
         const{
             nombre,
             apellido,
-            email, 
+            email,
             pass1,
             pass2,
-            tel,
             empresa
         } = this.state;
 
         const isInvalid = pass1 !== pass2 ||
-        pass1 === '' ||
         nombre === '' ||
         apellido === '' ||
         email === '' ||
-        tel === '' ||
-        empresa === ''; 
-    
+        pass1  === '' ||
+        empresa === '';
+
         return(
             <div>
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={event => this.onCreate(event)}>
                     <div>
-                        <label>Nombre </label>
+                        <span>Nombre</span><br />
                         <input type="text" 
                             value={nombre} onChange={event => this.setState(byPropKey('nombre', event.target.value))}
                         />
                     </div>
                     <div>
-                        <label>Apellido </label>
+                        <span>Apellido</span><br />
                         <input type="text"
-                        value={apellido} onChange={event => this.setState(byPropKey('apellido', event.target.value))}
-                         />
+                            value={apellido} onChange={event => this.setState(byPropKey('apellido', event.target.value))}
+                        />
                     </div>
                     <div>
-                        <label>email</label>
+                        <span>Email</span><br />
                         <input type="email" 
                             value={email} onChange={event => this.setState(byPropKey('email', event.target.value))}
                         />
                     </div>
                     <div>
-                        <label>Contraseña</label>
+                        <span>Ingresar contraseña</span><br />
                         <input type="password" 
                             value={pass1} onChange={event => this.setState(byPropKey('pass1', event.target.value))}
                         />
                     </div>
                     <div>
-                        <label>Volver a introducir la contraseña</label>
+                        <span>Volver a ingresar la contraseña</span><br />
                         <input type="password" 
                             value={pass2} onChange={event => this.setState(byPropKey('pass2', event.target.value))}
                         />
                     </div>
                     <div>
-                        <label>Telefono</label>
-                        <input type="tel"
-                            value={tel} onChange={event=> this.setState(byPropKey('tel', event.target.value))}
-                        />
-                    </div>
-                    <div>
-                        <label>Empresa</label>
-                        <input type="text" 
+                        <span>Empresa</span><br />
+                        <input 
                             value={empresa} onChange={event => this.setState(byPropKey('empresa', event.target.value))}
                         />
                     </div>
                 </form>
-                <button disabled={isInvalid} type="submit" value="crear">Crear cuenta</button>
+                <button disabled={isInvalid} type="submit" value="submit">Sign up</button>
             </div>
         );
     }
 }
 
-export default RegistraUsuario;
+export default Registra;

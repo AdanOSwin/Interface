@@ -22,6 +22,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Signin from './Signin';
 import './App.css';
 import RegistraUsuario from './RegisterUser';
+import Registra from './RegistroUsuario';
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/Info" component={Info} />
-        <Route exact path="/signup" component={RegistraUsuario} />
+        <Route exact path="/signup" component={Registra} />
         <Route exact path="/signin" component={Signin} />
       </Switch>
     </div>

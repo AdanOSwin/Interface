@@ -16,7 +16,7 @@ const byPropKey = (propertyName, value) => () =>({
 
 
 
-class Sigin extends Component{
+class Signin extends Component{
     constructor(props){
         super(props);
 
@@ -59,8 +59,7 @@ class Sigin extends Component{
         const isInvalid = password === '' || email === '';
         return(
             <div>
-                <h1>Pagina de Inicio</h1>
-                <h2>Sistema de organización empresarial IDEE</h2>
+                <h2>Iniciar sesión</h2>
                 <form onSubmit={this.onSubmit}>
                 <div>
                     <span>Email</span>
@@ -82,4 +81,4 @@ class Sigin extends Component{
 }
 
 
-export default Sigin;
+export default Signin;
